@@ -10,7 +10,7 @@
     <?php 
         echo "<h2>Sign Up</h2>";
         if(empty($_POST['customer_register'])) { ?> 
-            <form action="login.php" method="post">
+            <form action="register.php" method="post">
             <div class="def-input">
                 <label for="username" name="username">Username</label>
                 <input type="text" name="username" placeholder="JamesSmith">
