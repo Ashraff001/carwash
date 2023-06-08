@@ -10,23 +10,20 @@
     <link rel="stylesheet" href="header.html">
     <h1>Login</h1>
     <?php 
-        echo "<h2>Sign Up</h2>";
         if(empty($_POST['customer_login'])) { ?> 
     <div class="container">
         <form action="" method="post">
             <div class="def-input">
                 <label for="email" name="email">Email</label>
-                <input type="email" name="username" placeholder="name@email.com">
+                <input type="email" name="email" placeholder="name@email.com">
             </div>
-                <br>
                 <br>
             <div class="def-input">
                 <label for="password" name="password">Password</label>
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="customer_password" placeholder="Password">
             </div>
             <div class="forget">
-                <label for="email" name="email">forget password</label>
-                <input type="email" name="username" placeholder="name@email.com">
+                <link href="forgetpassword.php">
             </div>
             <div class="def-input">
                 <input type="submit" name="customer_login" value="Login">
@@ -39,16 +36,28 @@
             $customer_password = $_POST['customer_password'];
 
             include 'connection.php';
-            $query = "SELECT * FROM customer";
+            $query = "SELECT customer_name, email, phone FROM customer WHERE email='$email' AND password='$customer_password'";
             $keeping = mysqli_query($connection, $query);
 
-            if($keeping){
-                echo "<br><p>Storing data sucessfully</p>";
-            }else{
-                echo "<br><p>Storing data failed</p>";
-            }
+            $data = mysqli_fetch_array($keeping);
+                    if(!empty($data['email'])){
+                        echo "Logged In";
+                        $_SESSION['customer_name'] = $data['customer_name'];
+
+                        $_SESSION['email'] = $data['email'];
         
-         }?>
+                        $_SESSION['phone'] = $data['phone'];
+                        echo "<p>Name: ".$data['customer_name']."</p>";
+                        echo "<p>Email:".$data['email']."</p>";
+                        echo "<p>Phone:".$data['phone']."</p>";
+                    }else{
+                        
+                      
+                     }
+                    
+                }
+            
+         ?>
     <link rel="stylesheet" href="footer.html">
     
     

@@ -10,6 +10,7 @@
     <?php 
         echo "<h2>Sign Up</h2>";
         if(empty($_POST['customer_register'])) { ?> 
+        <div class="container">
             <form action="register.php" method="post">
             <div class="def-input">
                 <label for="customer_name" class="customer_name">Username</label>
@@ -36,6 +37,7 @@
             </div>
 
         </form>
+        </div>
         <?php } else{
             $customer_name= $_POST['customer_name'];
             $email = $_POST['email'];
@@ -43,7 +45,13 @@
             $phone = $_POST['phone'];
 
             include 'connection.php';
-            $query = "INSERT INTO customer (customer_name, phone, email, password) VALUES('$customer_name', '$phone', '$email', '$customer_password')";
+            $check = "SELECT * FROM customers WHERE customer_name = '$customer_name', email='$email', password='$passowrd', phone='$phone'";
+            $count = mysqli_num_rows($check);
+                if($count == 0){
+                    $query = "INSERT INTO customer (customer_name, phone, email, password) VALUES('$customer_name', '$phone', '$email', '$customer_password')";
+                }else{
+                    echo 'The user is already present in the employee table' ;
+                }
             $keeping = mysqli_query($connection, $query);
 
             if($keeping){
