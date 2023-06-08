@@ -9,6 +9,9 @@
 <body>
     <link rel="stylesheet" href="header.html">
     <h1>Login</h1>
+    <?php 
+        echo "<h2>Sign Up</h2>";
+        if(empty($_POST['customer_login'])) { ?> 
     <div class="container">
         <form action="" method="post">
             <div class="def-input">
@@ -26,11 +29,26 @@
                 <input type="email" name="username" placeholder="name@email.com">
             </div>
             <div class="def-input">
-                <input type="submit" name="submit" value="Login">
+                <input type="submit" name="customer_login" value="Login">
             </div>
 
         </form>
     </div>
+    <?php } else{
+            $email = $_POST['email'];
+            $customer_password = $_POST['customer_password'];
+
+            include 'connection.php';
+            $query = "SELECT * FROM customer";
+            $keeping = mysqli_query($connection, $query);
+
+            if($keeping){
+                echo "<br><p>Storing data sucessfully</p>";
+            }else{
+                echo "<br><p>Storing data failed</p>";
+            }
+        
+         }?>
     <link rel="stylesheet" href="footer.html">
     
     
