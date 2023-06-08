@@ -7,7 +7,7 @@
     <title>Server</title>
 </head>
 <body>
-    <link rel="stylesheet" href="connection.php">
+    <link rel="stylesheet" href="insertquerytest.php">
     <h1>Testing</h1>
 </body>
 </html>
