@@ -43,22 +43,18 @@
             $email = $_POST['email'];
             $customer_password = $_POST['customer_password'];
             $phone = $_POST['phone'];
-
+            
             include 'connection.php';
-            $check = "SELECT * FROM customers WHERE customer_name = '$customer_name', email='$email', password='$passowrd', phone='$phone'";
-            $count = mysqli_num_rows($check);
-                if($count == 0){
-                    $query = "INSERT INTO customer (customer_name, phone, email, password) VALUES('$customer_name', '$phone', '$email', '$customer_password')";
-                }else{
-                    echo 'The user is already present in the employee table' ;
-                }
+            
+            $query = " INSERT INTO customer (customer_name, phone, email, password) VALUES('$customer_name', '$phone', '$email', '$customer_password')";
             $keeping = mysqli_query($connection, $query);
-
+            
             if($keeping){
                 echo "<br><p>Storing data sucessfully</p>";
             }else{
                 echo "<br><p>Storing data failed</p>";
             }
+       
         
          }?>
 </body>
